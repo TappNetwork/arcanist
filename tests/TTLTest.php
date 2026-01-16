@@ -15,7 +15,6 @@ namespace Arcanist\Tests;
 
 use Arcanist\TTL;
 use Carbon\Carbon;
-use Generator;
 use InvalidArgumentException;
 
 class TTLTest extends \PHPUnit\Framework\TestCase
@@ -32,7 +31,7 @@ class TTLTest extends \PHPUnit\Framework\TestCase
         self::assertTrue($ttl->expiresAfter()->eq($expectedDate()));
     }
 
-    public function validValueProvider(): Generator
+    public static function validValueProvider(): iterable
     {
         yield from [
             [0, fn () => now()],
@@ -60,7 +59,7 @@ class TTLTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($value, $ttl->toSeconds());
     }
 
-    public function secondsProvider(): Generator
+    public static function secondsProvider(): iterable
     {
         yield from [
             [0],

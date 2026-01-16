@@ -30,7 +30,6 @@ use Arcanist\Renderer\FakeResponseRenderer;
 use Arcanist\Repository\FakeWizardRepository;
 use Arcanist\StepResult;
 use Arcanist\WizardStep;
-use Generator;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\RedirectResponse;
@@ -223,7 +222,7 @@ class WizardTest extends WizardTestCase
         self::assertEquals($id, $summary['id']);
     }
 
-    public function idProvider(): Generator
+    public static function idProvider(): iterable
     {
         yield from [
             'no id' => [null],
@@ -306,7 +305,7 @@ class WizardTest extends WizardTestCase
         self::assertEquals($expected, $wizard->exists());
     }
 
-    public function wizardExistsProvider(): Generator
+    public static function wizardExistsProvider(): iterable
     {
         yield from [
             'does not exist' => [null, false],
@@ -373,7 +372,7 @@ class WizardTest extends WizardTestCase
         ]));
     }
 
-    public function sharedDataProvider(): Generator
+    public static function sharedDataProvider(): iterable
     {
         yield from [
             'create' => [
@@ -390,7 +389,7 @@ class WizardTest extends WizardTestCase
         ];
     }
 
-    public function beforeSaveProvider(): Generator
+    public static function beforeSaveProvider(): iterable
     {
         $validRequest = Request::create('::uri::', 'POST', [
             'first_name' => '::first-name::',
@@ -522,7 +521,7 @@ class WizardTest extends WizardTestCase
         );
     }
 
-    public function afterSaveProvider(): Generator
+    public static function afterSaveProvider(): iterable
     {
         yield from [
             'update' => [
@@ -592,7 +591,7 @@ class WizardTest extends WizardTestCase
         self::assertTrue($renderer->didRedirectTo($expectedStep));
     }
 
-    public function resumeWizardProvider(): Generator
+    public function resumeWizardProvider(): iterable
     {
         yield from [
             [
@@ -645,7 +644,7 @@ class WizardTest extends WizardTestCase
         );
     }
 
-    public function errorWizardProvider(): Generator
+    public static function errorWizardProvider(): iterable
     {
         yield from [
             'store' => [
@@ -718,14 +717,14 @@ class TestWizard extends AbstractWizard
         TestStepWithViewData::class,
     ];
 
-    protected function onAfterComplete(ActionResult $result): Response|Responsable|Renderable
+    protected function onAfterComplete(ActionResult $result): Renderable|Responsable|Response
     {
         ++$_SERVER['__onAfterComplete.called'];
 
         return redirect()->back();
     }
 
-    protected function onAfterDelete(): Response|Responsable|Renderable
+    protected function onAfterDelete(): Renderable|Responsable|Response
     {
         ++$_SERVER['__onAfterDelete.called'];
 

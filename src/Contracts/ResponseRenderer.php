@@ -28,16 +28,16 @@ interface ResponseRenderer
         WizardStep $step,
         AbstractWizard $wizard,
         array $data = [],
-    ): Response|Responsable|Renderable;
+    ): Renderable|Responsable|Response;
 
     public function redirect(
         WizardStep $step,
         AbstractWizard $wizard,
-    ): Response|Responsable|Renderable;
+    ): Renderable|Responsable|Response;
 
     public function redirectWithError(
         WizardStep $step,
         AbstractWizard $wizard,
         ?string $error = null,
-    ): Response|Responsable|Renderable;
+    ): Renderable|Responsable|Response;
 }

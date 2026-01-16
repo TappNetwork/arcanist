@@ -170,7 +170,7 @@ abstract class AbstractWizard
     /**
      * Renders the template of the first step of this wizard.
      */
-    public function create(Request $request): Responsable|Response|Renderable
+    public function create(Request $request): Renderable|Responsable|Response
     {
         return $this->renderStep($request, $this->availableSteps()[0]);
     }
@@ -180,7 +180,7 @@ abstract class AbstractWizard
      *
      * @throws UnknownStepException
      */
-    public function show(Request $request, string $wizardId, ?string $slug = null): Response|Responsable|Renderable
+    public function show(Request $request, string $wizardId, ?string $slug = null): Renderable|Responsable|Response
     {
         $this->load($wizardId);
 
@@ -208,7 +208,7 @@ abstract class AbstractWizard
      *
      * @throws ValidationException
      */
-    public function store(Request $request): Response|Responsable|Renderable
+    public function store(Request $request): Renderable|Responsable|Response
     {
         $step = $this->loadFirstStep();
 
@@ -237,7 +237,7 @@ abstract class AbstractWizard
      * @throws UnknownStepException
      * @throws ValidationException
      */
-    public function update(Request $request, string $wizardId, string $slug): Response|Responsable|Renderable
+    public function update(Request $request, string $wizardId, string $slug): Renderable|Responsable|Response
     {
         $this->load($wizardId);
 
@@ -270,7 +270,7 @@ abstract class AbstractWizard
             );
     }
 
-    public function destroy(Request $request, string $wizardId): Response|Responsable|Renderable
+    public function destroy(Request $request, string $wizardId): Renderable|Responsable|Response
     {
         $this->load($wizardId);
 
@@ -352,7 +352,7 @@ abstract class AbstractWizard
     /**
      * Gets called after the last step in the wizard is finished.
      */
-    protected function onAfterComplete(ActionResult $result): Response|Responsable|Renderable
+    protected function onAfterComplete(ActionResult $result): Renderable|Responsable|Response
     {
         return redirect()->to($this->redirectTo());
     }
@@ -369,7 +369,7 @@ abstract class AbstractWizard
     /**
      * Gets called after the wizard was deleted.
      */
-    protected function onAfterDelete(): Response|Responsable|Renderable
+    protected function onAfterDelete(): Renderable|Responsable|Response
     {
         return redirect()->to($this->redirectTo());
     }
@@ -426,7 +426,7 @@ abstract class AbstractWizard
         event(new WizardLoaded($this));
     }
 
-    private function renderStep(Request $request, WizardStep $step): Responsable|Response|Renderable
+    private function renderStep(Request $request, WizardStep $step): Renderable|Responsable|Response
     {
         return $this->responseRenderer->renderStep(
             $step,
@@ -462,7 +462,7 @@ abstract class AbstractWizard
         $this->wizardRepository->saveData($this, $data);
     }
 
-    private function processLastStep(Request $request, WizardStep $step): Response|Responsable|Renderable
+    private function processLastStep(Request $request, WizardStep $step): Renderable|Responsable|Response
     {
         $this->load($this->id);
 

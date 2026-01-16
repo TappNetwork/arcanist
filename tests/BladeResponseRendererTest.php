@@ -19,7 +19,6 @@ use Arcanist\Contracts\ResponseRenderer;
 use Arcanist\Renderer\BladeResponseRenderer;
 use Arcanist\Testing\ResponseRendererContractTests;
 use Arcanist\WizardStep;
-use Generator;
 use Illuminate\Contracts\View\View;
 use Illuminate\Testing\TestResponse;
 use Mockery as m;
@@ -104,7 +103,7 @@ class BladeResponseRendererTest extends TestCase
         $response->assertRedirect(route('wizard.blade-wizard.show', [1, 'blade-step']));
     }
 
-    public function redirectToStepProvider(): Generator
+    public static function redirectToStepProvider(): iterable
     {
         yield from [
             'redirect' => [

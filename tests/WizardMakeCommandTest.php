@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Arcanist\Tests;
 
-use Generator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Spatie\Snapshots\MatchesSnapshots;
@@ -58,7 +57,7 @@ class WizardMakeCommandTest extends TestCase
         }
     }
 
-    public function stepCommandInvocationProvider(): Generator
+    public static function stepCommandInvocationProvider(): iterable
     {
         yield from [
             [['Step1']],
@@ -83,7 +82,7 @@ class WizardMakeCommandTest extends TestCase
         self::assertFalse(File::exists(app_path('Wizards/' . $this->wizardName . '/Steps')));
     }
 
-    public function emptyStepNameProvider(): Generator
+    public static function emptyStepNameProvider(): iterable
     {
         yield from [
             ['--steps'],
