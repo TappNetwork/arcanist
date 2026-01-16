@@ -58,8 +58,8 @@ class WizardTestCase extends TestCase
     }
 
     /**
-     * @param null|class-string<AbstractWizard> $wizardClass
      * @param array<string, mixed>              $data
+     * @param null|class-string<AbstractWizard> $wizardClass
      */
     protected function createWizardRepository(array $data = [], ?string $wizardClass = null): FakeWizardRepository
     {

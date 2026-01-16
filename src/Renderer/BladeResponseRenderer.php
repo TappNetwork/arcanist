@@ -34,7 +34,7 @@ class BladeResponseRenderer implements ResponseRenderer
         WizardStep $step,
         AbstractWizard $wizard,
         array $data = [],
-    ): Response|Responsable|Renderable {
+    ): Renderable|Responsable|Response {
         $viewName = $this->viewBasePath . '.' . $wizard::$slug . '.' . $step->slug;
 
         try {
@@ -47,7 +47,7 @@ class BladeResponseRenderer implements ResponseRenderer
         }
     }
 
-    public function redirect(WizardStep $step, AbstractWizard $wizard): Response|Renderable|Responsable
+    public function redirect(WizardStep $step, AbstractWizard $wizard): Renderable|Responsable|Response
     {
         if (!$wizard->exists()) {
             return redirect()->route('wizard.' . $wizard::$slug . '.create');
@@ -62,7 +62,7 @@ class BladeResponseRenderer implements ResponseRenderer
         WizardStep $step,
         AbstractWizard $wizard,
         ?string $error = null,
-    ): Response|Renderable|Responsable {
+    ): Renderable|Responsable|Response {
         return redirect()
             ->route('wizard.' . $wizard::$slug . '.show', [
                 $wizard->getId(),

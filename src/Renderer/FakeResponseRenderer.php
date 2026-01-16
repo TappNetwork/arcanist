@@ -37,7 +37,7 @@ class FakeResponseRenderer implements ResponseRenderer
         WizardStep $step,
         AbstractWizard $wizard,
         array $data = [],
-    ): Response|Responsable {
+    ): Responsable|Response {
         $this->renderedSteps[$step::class] = $data;
 
         return new Response();
