@@ -2,7 +2,7 @@
 
 ## Installation
 
-Arcanist requires at least PHP 8.1 and Laravel 9 or Laravel 10.
+Arcanist requires at least PHP 8.1 and Laravel 9 through Laravel 13.
 
 ```
 composer require laravel-arcanist/arcanist
